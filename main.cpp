@@ -1,7 +1,8 @@
 #include <SFML/Graphics.hpp>
-#include<iostream>
+#include <iostream>
 #include <vector>
 #include "Vector2.hpp"
+#include <string>
 
 using namespace sf;
 using namespace std;
@@ -11,6 +12,12 @@ void Draw(RenderWindow &window, Sprite &chessboard, Sprite &bielaveza);
 int sizeofchessboard = 665;
 //float sizeofchessboard1 ;
 int s;
+int r;
+int q = 5;
+bool rr = 0;
+bool oo = 0;
+//int w;
+int w = -1;
 //float sizeofchessboard3;
 
 float sizeofchessboard1 = (sizeofchessboard/665); //size
@@ -348,24 +355,75 @@ h8.pos2 = sizeofchessboard9;
 Square squares[64] = {a1, b1, c1, d1, e1, f1, g1, h1, a2, b2, c2, d2, e2, f2, g2, h2, a3, b3, c3, d3, e3, f3, g3, h3, a4, b4, c4, d4, e4, f4, g4, h4, a5, b5, c5, d5, e5, f5, g5, h5, a6, b6, c6, d6, e6, f6, g6, h6, a7, b7, c7, d7, e7, f7, g7, h7, a8, b8, c8, d8, e8, f8, g8, h8};
 string squares1[64] = {"a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1", "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2", "a3", "b3", "c3", "d3", "e3", "f3", "g3", "h3", "a4", "b4", "c4", "d4", "e4", "f4", "g4", "h4", "a5", "b5", "c5", "d5", "e5", "f5", "g5", "h5", "a6", "b6", "c6", "d6", "e6", "f6", "g6", "h6", "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7", "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8"};
 
+int c;
 
 
 //Pieces
  Piece WhiteRook1;
 WhiteRook1.id = 8;
 WhiteRook1.position = info[1];
-WhiteRook1.pos = "a1";
-int w;
+WhiteRook1.pos = "e4";
+
 for(int u = 0; u < 64; u++ ){
-if(WhiteRook1.pos == squares1[u] ){
-u = (w + 1);
+    if(WhiteRook1.pos == squares1[u] ){
+    w = (u + 1);
+        cout << "w =";
+            cout << w << endl;
+
+                // Column calculation code
+                     int c = (w - 1) % 8;
+                        cout << "c = " << c << endl;
+
+
+break;
 }
 
-//coulumn
-int c = (w % 8);
-//rank
-int r = (((w + 8) - 1) / 8);
+/*if (w != -1) { 
 
+//coulumn
+c = (w - 1) % 8;
+//c = (w % 8);
+
+//if(rr == 0){
+cout << "c =";
+
+cout << c << endl;
+rr = 1;
+//}
+
+}
+*/
+
+
+    // Column calculation code
+    //c = (w - 1) % 8;
+   // cout << "c = " << c << endl;
+
+
+
+
+//rank
+std::string numericPart = WhiteRook1.pos.substr(1);
+int r = std::stoi(numericPart);
+
+//int r = (((w + 8) - 1) % 8);
+
+
+if(oo == 0){
+    cout << "r =";
+
+cout << r << endl;
+oo = 1;
+}
+
+
+
+
+
+
+
+
+//gets coulumns to the right edge of the board
 int p[8];
 for(int s = 1; s <= (8 - c); s++){
 if (s != c){
@@ -373,6 +431,9 @@ if (s != c){
 p[s] = (c + s);
 }
 
+
+
+//gets coulumns to the left edge of the board
 
 }
 
@@ -382,6 +443,15 @@ for(int d = 1; d <= (8 - (8 - c)); d++){
 m[d] = (d);
     }
 }
+
+
+int t[8];
+for(int e = 1; e <= (8 - (8 - r)); e++){
+    if (e != c){
+t[e] = (e);
+    }
+}
+
 
 
 
@@ -448,10 +518,16 @@ sf::Texture kral;
                 }
 
         
+
+
+
         window.clear();              
        
              Update(keyTime, window, chessboard);
 	        Draw(window, chessboard, bielaveza);
+
+
+
                 //window.draw(kralbiely);
                 //	window.display();
                     
@@ -460,6 +536,7 @@ sf::Texture kral;
     }
     //cout << a1.pos;
    //std::cout << sizeofchessboard3;
+    
     return 0;
 }
 
@@ -485,7 +562,13 @@ void Draw(RenderWindow &window, Sprite &chessboard, Sprite &bielaveza)
        
         //Vecne zabudnutie :{
         
-        
+        /*if(q == 5){
+
+    cout << r;
+    cout << "\n";
+q = 1;
+continue;
+}*/
         
         // draw everything here...
         // window.draw(...);
