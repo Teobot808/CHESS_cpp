@@ -18,6 +18,12 @@ bool rr = 0;
 bool oo = 0;
 //int w;
 int w = -1;
+int position_rook1;
+int position_rook2;
+
+
+
+
 //float sizeofchessboard3;
 
 float sizeofchessboard1 = (sizeofchessboard/665); //size
@@ -365,7 +371,7 @@ WhiteRook1.position = info[1];
 WhiteRook1.pos = "e4"; //position of the white rook
 
 
-
+//position calculation code
 for(int u = 0; u < 64; u++ ){
     if(WhiteRook1.pos == squares1[u] ){
     w = (u + 1);
@@ -387,7 +393,7 @@ int r = std::stoi(numericPart);
 
 //int r = (((w + 8) - 1) % 8);
 
-
+//debuging function
 if(oo == 0){
     cout << "r =";
 
@@ -459,7 +465,10 @@ cout << endl;
 
 
 
-
+position_rook1 = squares[w - 1].pos1;
+cout << position_rook1 << endl;
+position_rook2 = squares[w - 1].pos2;
+cout << position_rook2 << endl;
 
 
 
@@ -501,7 +510,7 @@ sf::Texture kral;
         bielaveza.setTexture(vezatexture);
         //chessboard.setPosition(sf::Vector2f(0.f, 0.f));
                bielaveza.setOrigin(66, 66);
-                bielaveza.setPosition(h3.pos1, h3.pos2);
+                bielaveza.setPosition(position_rook1, position_rook2);
         bielaveza.setScale(0.62973484848f, 0.62973484848f);
 
 
