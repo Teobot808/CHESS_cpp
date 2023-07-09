@@ -362,7 +362,9 @@ int c;
  Piece WhiteRook1;
 WhiteRook1.id = 8;
 WhiteRook1.position = info[1];
-WhiteRook1.pos = "e4";
+WhiteRook1.pos = "e4"; //position of the white rook
+
+
 
 for(int u = 0; u < 64; u++ ){
     if(WhiteRook1.pos == squares1[u] ){
@@ -371,38 +373,15 @@ for(int u = 0; u < 64; u++ ){
             cout << w << endl;
 
                 // Column calculation code
-                     int c = (w - 1) % 8;
+                     int c = w % 8;
                         cout << "c = " << c << endl;
 
 
 break;
-}
-
-/*if (w != -1) { 
-
-//coulumn
-c = (w - 1) % 8;
-//c = (w % 8);
-
-//if(rr == 0){
-cout << "c =";
-
-cout << c << endl;
-rr = 1;
-//}
+} 
 
 }
-*/
-
-
-    // Column calculation code
-    //c = (w - 1) % 8;
-   // cout << "c = " << c << endl;
-
-
-
-
-//rank
+//rank calculation code
 std::string numericPart = WhiteRook1.pos.substr(1);
 int r = std::stoi(numericPart);
 
@@ -445,18 +424,42 @@ m[d] = (d);
 }
 
 
-int t[8];
-for(int e = 1; e <= (8 - (8 - r)); e++){
-    if (e != c){
-t[e] = (e);
-    }
+//calculates ranks under the rook
+
+int t[8] = {0};
+for(int e = 1; e <= (8 - (8 - r)); e++)
+{
+    if (e != r)
+    {
+        t[e] = (e);
+     }   
+     if(t[e] != 0){
+     cout << t[e] ;
+     }
 }
+cout << endl;
+
+                        // cout << t[e] << "\n";
 
 
-
-
-
+//calculates ranks above the rook
+           
+int b[8] = {0};
+for(int e = r; e < 9; e++)
+{
+    if (e != r)
+    {
+        b[e] = (e);
+     }   
+     if(b[e] != 0){
+     cout << b[e] ;
+     }
 }
+cout << endl;
+
+
+
+
 
 
 
@@ -561,7 +564,27 @@ void Draw(RenderWindow &window, Sprite &chessboard, Sprite &bielaveza)
 
        
         //Vecne zabudnutie :{
-        
+        /*if (w != -1) { 
+
+//coulumn
+c = (w - 1) % 8;
+//c = (w % 8);
+
+//if(rr == 0){
+cout << "c =";
+
+cout << c << endl;
+rr = 1;
+//}
+
+}
+*/
+
+
+    // Column calculation code
+    //c = (w - 1) % 8;
+   // cout << "c = " << c << endl;
+
         /*if(q == 5){
 
     cout << r;
