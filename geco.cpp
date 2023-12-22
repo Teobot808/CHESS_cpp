@@ -1,7 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <sstream>
-#include <future>
 
 const int BOARD_SIZE = 8;
 const int TILE_SIZE = 80;
@@ -62,76 +60,24 @@ public:
 
 private:
     char board[BOARD_SIZE][BOARD_SIZE] = {
+        {'r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'},
+        {'p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+        {'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'},
+        {'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R'}
     };
 
     sf::Font font; // Font for drawing text on squares
 };
 
-int StartingPos(ChessboardGUI& chessboardGUI){
-
-    chessboardGUI.setPiece(0, 0, 'r');
-    chessboardGUI.setPiece(1, 0, 'n');
-    chessboardGUI.setPiece(2, 0, 'b');
-    chessboardGUI.setPiece(3, 0, 'q');
-    chessboardGUI.setPiece(4, 0, 'k');
-    chessboardGUI.setPiece(5, 0, 'b');
-    chessboardGUI.setPiece(6, 0, 'n');
-    chessboardGUI.setPiece(7, 0, 'r');
-
-    chessboardGUI.setPiece(0, 7, 'R');
-    chessboardGUI.setPiece(1, 7, 'N');
-    chessboardGUI.setPiece(2, 7, 'B');
-    chessboardGUI.setPiece(3, 7, 'Q');
-    chessboardGUI.setPiece(4, 7, 'K');
-    chessboardGUI.setPiece(5, 7, 'B');
-    chessboardGUI.setPiece(6, 7, 'N');
-    chessboardGUI.setPiece(7, 7, 'R');
-
-
-for(int i = 0; i < 8; i++){
-   
- chessboardGUI.setPiece(i, 6, 'P');
-
-}
-for(int i = 0; i < 8; i++){
-   
- chessboardGUI.setPiece(i, 1, 'p');
-
-}
-return 2;
-}
-
-int PieceMove(ChessboardGUI& chessboardGUI, int a, int b, int c, int d, char e){
-  chessboardGUI.setPiece(a, b, ' ');  
-    chessboardGUI.setPiece(c, d, e);  
-return 4;
-}
-
-
 int main() {
     ChessboardGUI chessboardGUI;
-std::cout << StartingPos(chessboardGUI);
-    // Function for getting moves asynchronously
-    auto getMovesAsync = std::async(std::launch::async, [&chessboardGUI]() {
-        int a, b, c, d;
-        char e;
 
-        while (chessboardGUI.window.isOpen()) {
-            std::cout << "Enter move (start_x start_y end_x end_y piece): ";
-            std::cin >> a >> b >> c >> d >> e;
-
-            // Perform the move
-            PieceMove(chessboardGUI, a, b, c, d, e);
-        }
-    });
+    // Set white pawn to e4
+    chessboardGUI.setPiece(4, 0, 'P');
 
     while (chessboardGUI.window.isOpen()) {
         sf::Event event;
@@ -144,9 +90,5 @@ std::cout << StartingPos(chessboardGUI);
         chessboardGUI.draw();
     }
 
-    // Wait for the input thread to finish
-    getMovesAsync.wait();
-
     return 0;
 }
- //std::cout << StartingPos(chessboardGUI);

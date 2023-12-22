@@ -1,7 +1,5 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <sstream>
-#include <future>
 
 const int BOARD_SIZE = 8;
 const int TILE_SIZE = 80;
@@ -118,35 +116,30 @@ return 4;
 
 int main() {
     ChessboardGUI chessboardGUI;
+int a,b,c,d;
+char e;
+std::cout << "Starting position:\n";
+    std::cout << "Enter moves in the format: start_x start_y end_x end_y piece\n";
+
+    // Set white pawn to e4
+    //chessboardGUI.setPiece(4, 4, 'P');
 std::cout << StartingPos(chessboardGUI);
-    // Function for getting moves asynchronously
-    auto getMovesAsync = std::async(std::launch::async, [&chessboardGUI]() {
-        int a, b, c, d;
-        char e;
-
-        while (chessboardGUI.window.isOpen()) {
-            std::cout << "Enter move (start_x start_y end_x end_y piece): ";
-            std::cin >> a >> b >> c >> d >> e;
-
-            // Perform the move
-            PieceMove(chessboardGUI, a, b, c, d, e);
-        }
-    });
-
     while (chessboardGUI.window.isOpen()) {
         sf::Event event;
         while (chessboardGUI.window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 chessboardGUI.window.close();
             }
+
+// Update the window contents to the current frame (clearing the screen).   
+            std::cin >> a >> b >> c >> d >> e;
+
+           PieceMove(chessboardGUI, a, b, c, d, e); 
+
         }
 
         chessboardGUI.draw();
     }
 
-    // Wait for the input thread to finish
-    getMovesAsync.wait();
-
     return 0;
 }
- //std::cout << StartingPos(chessboardGUI);
